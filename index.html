@@ -6,8 +6,30 @@
     <title>Actions Tracker</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
 </head>
 <body>
-    <h1 class="text-center">Hi</h1>
+    <div class="container d-flex flex-column align-items-center py-3">
+        <h1>Actions Tracker</h1>
+        <main>
+            <div class="btn-group gap-2 mb-2" role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-info"><i class="fa-solid fa-backward-step"></i></button>
+              <button type="button" class="btn btn-info"><i class="fa-solid fa-backward"></i></button>
+              <button type="button" class="btn btn-warning"><i class="fa-solid fa-pause"></i></button>
+              <button type="button" class="btn btn-success"><i class="fa-solid fa-play"></i></button>
+              <button type="button" class="btn btn-info"><i class="fa-solid fa-forward"></i></button>
+              <button type="button" class="btn btn-info"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+              <label for="floatingTextarea2">Write something here...</label>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
