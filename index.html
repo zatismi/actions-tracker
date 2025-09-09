@@ -12,36 +12,123 @@
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body class="bg-dark">
     <div class="container d-flex flex-column align-items-center py-3">
-        <h1>Actions Tracker</h1>
+        <h1 class="text-info py-2">Actions Tracker</h1>
+        <h2 class="text-info py-2">Text Input</h2>
         <main class="d-flex flex-column">
-            <div class="btn-group gap-2 mb-2" role="group" aria-label="Basic mixed styles example">
+            <div class="form-floating">
+                <textarea
+                class="form-control text-inputs"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2 "
+                style="height: 100px"
+                oninput="actions()"
+                ></textarea>
+                <label for="floatingTextarea2">input</label>
+            </div>
+            <div class="btn-group gap-2 my-3" role="group" aria-label="Basic mixed styles example">
               <button id="fast-backward-btn" type="button" class="btn btn-info" onclick="backwardFast()"><i class="fa-solid fa-backward-fast"></i></button>
               <button id="step-backward-btn" type="button" class="btn btn-info" onclick="backwardStep()"><i class="fa-solid fa-backward-step"></i></button>
-              <button id="pause-btn" type="button" class="btn btn-warning visually-hidden" onclick="pause()"><i class="fa-solid fa-pause"></i></button>
-              <button id="play-btn" type="button" class="btn btn-success" onclick="play()"><i class="fa-solid fa-play"></i></button>
+              <div class="swap-wrap w-25">
+                <button id="pause-btn"  type="button" class="btn btn-warning hidden" onclick="pause()">
+                  <i class="fa-solid fa-pause"></i>
+                </button>
+                <button id="play-btn"   type="button" class="btn btn-success shown" onclick="play()">
+                  <i class="fa-solid fa-play"></i>
+                </button>
+              </div>
+
               <button id="step-forward-btn" type="button" class="btn btn-info" onclick="forwardStep()"><i class="fa-solid fa-forward-step"></i></button>
               <button id="fast-forward-btn" type="button" class="btn btn-info" onclick="forwardFast()"><i class="fa-solid fa-forward-fast"></i></button>
             </div>
-            <div class="form-floating">
-              <textarea
-                  class="form-control text-inputs"
-                  placeholder="Leave a comment here"
-                  id="floatingTextarea2 "
-                  style="height: 100px"
-                  oninput="actions()"
-              ></textarea>
-              <label for="floatingTextarea2">Write something here...</label>
-            </div>
-            <div>
-                <label for="disabledRange" class="form-label">Disabled range</label>
-                <input type="range" class="form-range" min="0" max="1" value="0" id="range1" oninput="sliderPlay()" disabled>
-            </div>
-            <div id="preview-box" style="width: 250px; overflow-wrap: break-word;">
-                <p>preview</p>
-            </div>
+              <div id="range-slider-container" class="pt-2 px-2 mb-3 rounded bg-colorish">
+                  <input type="range" class="form-range" min="0" max="1" value="0" id="range1" oninput="sliderPlay()" disabled>
+              </div>
+            <section>
+              <p>
+                <button class="btn btn-info w-100" type="button" data-bs-toggle="collapse" data-bs-target="#showInputCollapse" aria-expanded="false" aria-controls="showInputCollapse">
+                  Show Inputs
+                </button>
+              </p>
+              <div class="collapse collapse-vertical" id="showInputCollapse">
+                <div id="preview-box" class="border border-info rounded bg-white p-2 mb-3">
+                  <p>Preview</p>
+                </div>
+              </div>
+            </section>
+            <section class="border rounded">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                About This App
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">About Actions Tracker</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>This app is intended for learning purposes and includes the following concepts</p>
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <span class="badge bg-primary">Variables & constants</span> → storing state (<code>historyArray</code>, <code>playClicked</code>, <code>interval</code>).
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-secondary">DOM selection & manipulation</span> → <code>getElementById</code>, <code>getElementsByClassName</code>, <code>.innerHTML</code>, <code>.classList</code>.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-success">Event handling</span> → triggered by <code>onclick</code>, <code>oninput</code>.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-danger">Functions</span> → modular logic (<code>record</code>, <code>play</code>, <code>pause</code>, etc.).
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-warning text-dark">Conditionals</span> → controlling flow with <code>if</code>.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-info text-dark">Loops / Iteration</span> → <code>setInterval</code> with incrementing index.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-dark">Arrays</span> → storing text history (<code>historyArray</code>).
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-primary">Type conversion</span> → <code>parseInt()</code> for slider value.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-secondary">State management</span> → toggling <code>playClicked</code>, tracking current index.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-success">Timers</span> → <code>setInterval</code> and <code>clearInterval</code>.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-danger">UI updates</span> → syncing text area, preview box, slider, button states.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-warning text-dark">Class-based animations</span> → <code>shown</code>/<code>hidden</code> toggle for transitions.
+                        </li>
+                        <li class="list-group-item">
+                          <span class="badge bg-info text-dark">Debugging / Logging</span> → <code>console.log</code>.
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <a type="button" class="btn btn-dark" href="https://github.com/zatismi" target="_blank">Visit Zatismi GitHub <i class="fa-brands fa-github"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="collapse collapse-vertical" id="aboutAppCollapse">
+                <div id="preview-box" class="border border-info rounded bg-white p-2">
+                </div>
+              </div>
+            </section>
         </main>
     </div>
     <script src="./script.js"></script>

@@ -2,6 +2,7 @@ let historyArray = [""];
 let textInputs = document.getElementsByClassName("text-inputs")[0];
 let previewBox = document.getElementById("preview-box");
 let rangeSlider = document.getElementById("range1");
+let rangeSliderContainer = document.getElementById("range-slider-container");
 let playClicked = false;
 let interval = null;
 
@@ -15,12 +16,14 @@ let fastForwardButton = document.getElementById("fast-forward-btn");
 
 function record(){
     rangeSlider.disabled = false;
+    rangeSliderContainer.classList.remove("bg-colorish");
+    rangeSliderContainer.classList.add("bg-info");
     historyArray.push(textInputs.value);
     rangeSlider.setAttribute("max", historyArray.length - 1);
 }
 
 function previewHistory(){
-    // previewBox.innerHTML = historyArray + historyArray.length;
+    previewBox.innerHTML = historyArray + historyArray.length;
     rangeSlider.setAttribute("value", historyArray.length);
 }
 
@@ -41,6 +44,7 @@ function play(){
             if(i == historyArray.length - 1){
                 clearInterval(interval);
                 playClicked = false;
+                replaceButton(pauseButton, playButton);
             }
             i++
         }, 100);
@@ -89,7 +93,18 @@ function backwardStep(){
     }
 }
 
+// function replaceButton(currentButton, replacingButton){
+//     // currentButton.classList.add("visually-hidden");
+//     currentButton.classList.remove("show");
+//     currentButton.classList.add("hide");
+//     // replacingButton.classList.remove("visually-hidden");
+//     replacingButton.classList.remove("hide");
+//     replacingButton.classList.add("show");
+// }
+
 function replaceButton(currentButton, replacingButton){
-    currentButton.classList.add("visually-hidden");
-    replacingButton.classList.remove("visually-hidden");
+  currentButton.classList.remove("shown");
+  currentButton.classList.add("hidden");
+  replacingButton.classList.remove("hidden");
+  replacingButton.classList.add("shown");
 }
