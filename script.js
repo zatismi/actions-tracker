@@ -3,7 +3,15 @@ let textInputs = document.getElementsByClassName("text-inputs")[0];
 let previewBox = document.getElementById("preview-box");
 let rangeSlider = document.getElementById("range1");
 let playClicked = false;
-        console.log(playClicked);
+let interval = null;
+
+// Buttons
+let fastBackwardButton = document.getElementById("fast-backward-btn");
+let stepBackwardButton = document.getElementById("step-backward-btn");
+let pauseButton = document.getElementById("pause-btn" );
+let playButton = document.getElementById("play-btn" );
+let stepForwardButton = document.getElementById("step-forward-btn");
+let fastForwardButton = document.getElementById("fast-forward-btn");
 
 function record(){
     rangeSlider.disabled = false;
@@ -12,7 +20,8 @@ function record(){
 }
 
 function previewHistory(){
-    previewBox.innerHTML = historyArray + historyArray.length;
+    // previewBox.innerHTML = historyArray + historyArray.length;
+    rangeSlider.setAttribute("value", historyArray.length);
 }
 
 function actions(){
@@ -22,23 +31,19 @@ function actions(){
 
 function play(){
     if(!playClicked && rangeSlider.value != historyArray.length - 1){
+        replaceButton(playButton, pauseButton);
         playClicked = true;
-        console.log(playClicked);
         console.log("Play Clicked");
-        // rangeSlider.value = 0;
-        // historyArray.forEach((element, index) => {
-        //     setTimeout(()=> {
-        //         textInputs.value = element;
-        //         rangeSlider.value = index + 1;
-        //     }, 100 * index);
-        // });
-        for(let i = rangeSlider.value; i < historyArray.length; i++) {
-            setTimeout(()=> {
-                textInputs.value = historyArray[i];
-                rangeSlider.value = i;
-                if(i == historyArray.length - 1) playClicked = false;
-            }, 100 * i);
-        }
+        let i = rangeSlider.value;
+        interval = setInterval(() => {
+            textInputs.value = historyArray[i];
+            rangeSlider.value = i;
+            if(i == historyArray.length - 1){
+                clearInterval(interval);
+                playClicked = false;
+            }
+            i++
+        }, 100);
     }
 }
 
@@ -51,7 +56,40 @@ function sliderPlay(){
     }
 }
 
-function pause(currentIndex){
-    console.log("Pause Clicked");
-    clearTimeout();
+function pause(){
+    clearInterval(interval);
+    interval = null;
+    playClicked = false;
+    replaceButton(pauseButton, playButton);
+}
+
+function forwardFast(){
+    rangeSlider.value = historyArray.length - 1;
+    textInputs.value = historyArray[historyArray.length - 1];
+}
+
+function backwardFast(){
+    rangeSlider.value = 0;
+    textInputs.value = historyArray[0];
+}
+
+function forwardStep(){
+    if(rangeSlider.value != historyArray.length - 1){
+        // funny implementation of the meme of js when 1-1=0 but 1+1=11 hhhhhh
+        let rs = parseInt(rangeSlider.value);
+        textInputs.value = historyArray[rs + 1];
+        rangeSlider.value = rs + 1;
+    }
+}
+
+function backwardStep(){
+    if(rangeSlider.value > 0){
+        textInputs.value = historyArray[rangeSlider.value - 1];
+        rangeSlider.value -= 1;
+    }
+}
+
+function replaceButton(currentButton, replacingButton){
+    currentButton.classList.add("visually-hidden");
+    replacingButton.classList.remove("visually-hidden");
 }

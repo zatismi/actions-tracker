@@ -16,14 +16,14 @@
 <body>
     <div class="container d-flex flex-column align-items-center py-3">
         <h1>Actions Tracker</h1>
-        <main>
+        <main class="d-flex flex-column">
             <div class="btn-group gap-2 mb-2" role="group" aria-label="Basic mixed styles example">
-              <button type="button" class="btn btn-info"><i class="fa-solid fa-backward-step"></i></button>
-              <button type="button" class="btn btn-info"><i class="fa-solid fa-backward"></i></button>
-              <button type="button" class="btn btn-warning" onclick="pause()"><i class="fa-solid fa-pause"></i></button>
-              <button type="button" class="btn btn-success" onclick="play()"><i class="fa-solid fa-play"></i></button>
-              <button type="button" class="btn btn-info"><i class="fa-solid fa-forward"></i></button>
-              <button type="button" class="btn btn-info"><i class="fa-solid fa-forward-step"></i></button>
+              <button id="fast-backward-btn" type="button" class="btn btn-info" onclick="backwardFast()"><i class="fa-solid fa-backward-fast"></i></button>
+              <button id="step-backward-btn" type="button" class="btn btn-info" onclick="backwardStep()"><i class="fa-solid fa-backward-step"></i></button>
+              <button id="pause-btn" type="button" class="btn btn-warning visually-hidden" onclick="pause()"><i class="fa-solid fa-pause"></i></button>
+              <button id="play-btn" type="button" class="btn btn-success" onclick="play()"><i class="fa-solid fa-play"></i></button>
+              <button id="step-forward-btn" type="button" class="btn btn-info" onclick="forwardStep()"><i class="fa-solid fa-forward-step"></i></button>
+              <button id="fast-forward-btn" type="button" class="btn btn-info" onclick="forwardFast()"><i class="fa-solid fa-forward-fast"></i></button>
             </div>
             <div class="form-floating">
               <textarea
