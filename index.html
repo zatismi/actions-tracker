@@ -20,16 +20,30 @@
             <div class="btn-group gap-2 mb-2" role="group" aria-label="Basic mixed styles example">
               <button type="button" class="btn btn-info"><i class="fa-solid fa-backward-step"></i></button>
               <button type="button" class="btn btn-info"><i class="fa-solid fa-backward"></i></button>
-              <button type="button" class="btn btn-warning"><i class="fa-solid fa-pause"></i></button>
-              <button type="button" class="btn btn-success"><i class="fa-solid fa-play"></i></button>
+              <button type="button" class="btn btn-warning" onclick="pause()"><i class="fa-solid fa-pause"></i></button>
+              <button type="button" class="btn btn-success" onclick="play()"><i class="fa-solid fa-play"></i></button>
               <button type="button" class="btn btn-info"><i class="fa-solid fa-forward"></i></button>
               <button type="button" class="btn btn-info"><i class="fa-solid fa-forward-step"></i></button>
             </div>
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+              <textarea
+                  class="form-control text-inputs"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea2 "
+                  style="height: 100px"
+                  oninput="actions()"
+              ></textarea>
               <label for="floatingTextarea2">Write something here...</label>
+            </div>
+            <div>
+                <label for="disabledRange" class="form-label">Disabled range</label>
+                <input type="range" class="form-range" min="0" max="1" value="0" id="range1" oninput="sliderPlay()" disabled>
+            </div>
+            <div id="preview-box" style="width: 250px; overflow-wrap: break-word;">
+                <p>preview</p>
             </div>
         </main>
     </div>
+    <script src="./script.js"></script>
 </body>
 </html>
